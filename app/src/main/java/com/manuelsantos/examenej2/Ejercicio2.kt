@@ -61,13 +61,9 @@ fun Ejercicio2() {
                 horizontalArrangement = Arrangement.SpaceEvenly
             ) {
                 items(listaColores) { color->
-                    Box(
-                        modifier = Modifier.height(130.dp)
-                            .padding(16.dp)
-                            .background(color)
-                            .border(5.dp, Color.Black)
-                            .clickable { colorSeleccionado = color }
-                    )
+                    ElementoListaColores(color) { colorEstado ->
+                        colorSeleccionado = colorEstado
+                    }
                 }
             }
             Spacer(modifier = Modifier.padding(vertical = 20.dp))
@@ -84,5 +80,16 @@ fun ElementoCuadrado(colorEstado: Color) {
             .padding(16.dp)
             .background(colorEstado)
             .border(5.dp, Color.Black)
+    )
+}
+
+@Composable
+fun ElementoListaColores(color: Color, cambiarEstado: (Color) -> Unit) {
+    Box(
+        modifier = Modifier.height(130.dp)
+            .padding(16.dp)
+            .background(color)
+            .border(5.dp, Color.Black)
+            .clickable { cambiarEstado(color) }
     )
 }
